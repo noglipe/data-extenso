@@ -13,48 +13,46 @@ ext = [
 
 unidade = ['', ' mil', (' milhão', ' milhões'), (' bilhão', ' bilhões'), (' trilhão', ' trilhões')]
 
-def converter_ano(valor):
-    retorno = ''
+def converter_ano(ano):
+    por_extenso = ''
 
-    if valor[0]=='1':
-        retorno = unidade[1]
+    if ano[0]=='1':
+        por_extenso = unidade[1]
     else:
-        retorno = ext[0].get(int(valor[0])) + unidade[1]
+        por_extenso = ext[0].get(int(ano[0])) + unidade[1]
     
-    retorno = retorno + ext[2].get(int(valor[1])) + ' e'
+    por_extenso = por_extenso + ext[2].get(int(ano[1])) + ' e'
 
-    if int(valor[2]) > 1:
-        retorno = retorno +  ext[1].get(int(valor[2]))
-        retorno = retorno +  ext[0].get(int(valor[3]))
+    if int(ano[2]) > 1:
+        por_extenso = por_extenso +  ext[1].get(int(ano[2]))
+        por_extenso = por_extenso +  ext[0].get(int(ano[3]))
     else:
-        retorno = retorno + ext[0].get(int(valor[2]))
+        por_extenso = por_extenso + ext[0].get(int(ano[2]))
             
-    return retorno
+    return por_extenso
 
-def converter_data_extenso(dia, mes, ano):
-    """
-    Converte uma data para extenso.
-
-    Args:
-    dia: O dia da data.
-    mes: O mês da data.
-    ano: O ano da data.
-
-    Returns:
-    Uma string com a data em extenso.
-    """
-
+def converter_dia(dia):
     por_extenso = ''
 
     if int(dia) > 19:
         por_extenso = ext[1].get(int(dia[0]))
         por_extenso = por_extenso +' e'+ ext[0].get(int(dia[1]))
+        return por_extenso[1:]
     else:
-        por_extenso = ext[0].get(int(dia[0]))
+        return ext[0].get(int(dia[0]))[1:]
+
+def converter_mes(mes):
 
     mes= int(mes) - 1
 
-    por_extenso = por_extenso + ' de'+ meses[mes] + ' de'+ converter_ano(ano)
+    return meses[mes]
+
+
+def converter_data_extenso(dia, mes, ano):
+
+    por_extenso = converter_dia(dia)
+    por_extenso = por_extenso + ' de'+ converter_mes(mes)
+    por_extenso = por_extenso + ' de' +converter_ano(ano)
 
     return por_extenso
 
@@ -78,4 +76,4 @@ def converte_data(data):
 
 
 d = date(1987, 11, 18)
-print(converte_data(d)[1:])
+print(converte_data(d))
