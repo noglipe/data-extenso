@@ -1,2 +1,5 @@
 # data-extenso
- Descrever a Data por Extenso
+  Descreer a data por extenso 
+
+## OBS:
+    A data precisa conter 4 digitos 
